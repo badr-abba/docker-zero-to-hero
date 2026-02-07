@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  # Service 1 : Notre application Web Python
+  web:
+    build: .             # Construit l'image depuis le Dockerfile courant
+    ports:
+      - "5000:5000"      # Mappe le port 5000 de l'hôte
+    depends_on:
+      - redis            # Attend que redis soit lancé
+    environment:
+      - FLASK_ENV=development
+
+  # Service 2 : La base de données Redis
+  redis:
+    image: "redis:alpine" # Utilise une image officielle légère
